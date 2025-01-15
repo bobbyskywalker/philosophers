@@ -2,7 +2,7 @@
 # define PHILO_H
 
 #include <pthread.h>
-
+#include <stdio.h>
 
 
 
