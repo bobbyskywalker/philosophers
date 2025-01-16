@@ -8,18 +8,15 @@ void *add(void *value)
 }
 
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    pthread_t thread1;
-    pthread_t thread2;
+    t_philo *philo;
 
-    long v = 300;
-    long v2 = 600;
-    pthread_create(&thread1, NULL, add, (void *) &v);
-    pthread_create(&thread2, NULL, add, (void *) &v2);
-    pthread_join(thread1, NULL);
-    pthread_join(thread2, NULL);
-    add(&v);
-    add(&v2);
+    error_handler(ac, av, philo);
+    printf("no philo: %d\n", philo->no_philo);
+    printf("ttd: %lu\n", philo->time_to_die);
+    printf("tte: %lu\n", philo->time_to_eat);
+    printf("tts: %lu\n", philo->time_to_sleep);
+//    printf("ttd: %lu", philo.time_to_die);
     return (0);
 }
