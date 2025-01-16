@@ -1,2 +1,0 @@
-each philosopher is a different thread
-each fork is a mutex

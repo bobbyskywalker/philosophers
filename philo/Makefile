@@ -1,9 +1,9 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = philo
 
-SRCS = src/main.c
+SRCS = src/main.c src/error_handler.c src/utils.c
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BONUS_SRCS:.c=.o)

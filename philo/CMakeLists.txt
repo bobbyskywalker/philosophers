@@ -3,9 +3,6 @@ cmake_minimum_required(VERSION 3.10)
 # Set project name and language (C and C++)
 project(philo C CXX)
 
-# Specify the C and C++ compilers explicitly (if needed)
-set(CMAKE_C_COMPILER /usr/bin/gcc)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 # Specify C++ include directories (make sure to use the correct version you have installed)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/include/c++/12")
@@ -27,7 +24,7 @@ add_library(error_handler
 )
 
 # Create the test executable from C test file
-add_executable(run_tests tests/error_handler_test.c)
+add_executable(run_tests tests/error_handler_test.cpp)
 
 # Link the GoogleTest and your C code
 target_link_libraries(run_tests gtest gtest_main error_handler)

@@ -1,18 +1,13 @@
 #include "../inc/philo.h"
 
-void *dummy_philo_action(void *n)
+
+// TODO: create structures with philosopher data (status, etc.)
+// Create logging (activities)
+// Initialize threads
+
+void create_threads(t_philo *philo, int *n)
 {
-    pthread_mutex_lock(&mutex);
-
-    n += 30;
-
-    pthread_mutex_unlock(&mutex);
-    return NULL;
-}
-
-void create_threads(t_philo *philo, int n)
-{
-    size_t i;
+    int i;
 
     i = 0;
     while (i < philo->no_philo)
@@ -20,6 +15,7 @@ void create_threads(t_philo *philo, int n)
         pthread_create(&philo->thread_list[i], NULL, dummy_philo_action, &n);
         i++;
     }
+    i = 0;
     while (i < philo->no_philo)
     {
         pthread_join(philo->thread_list[i], NULL);
@@ -30,7 +26,6 @@ void create_threads(t_philo *philo, int n)
 int main(int ac, char **av)
 {
     t_philo *philo;
-    pthread_mutex_t mutex;
 
     int tmp = 1;
     philo = malloc(sizeof(t_philo));
@@ -41,25 +36,27 @@ int main(int ac, char **av)
         printf("valid exec: ./philo <no. philosophers> <time to die> <time to eat> <time to sleep> [opt. <no. of times to eat>]\n");
         return (1);
     }
-    philo->thread_list = malloc(philo->no_philo * sizeof(pthread_t));
-    if (!philo->thread_list)
-    {
-      free(philo);
-      return (1);
-    }
+    // philo->mutex = malloc(sizeof(pthread_mutex_t));
+    // if (!philo->mutex)
+    // {
+    //     free(philo);
+    //     return (1);
+    // }
 
-    pthread_mutex_init(&mutex, NULL);
-    create_threads(philo, tmp);
-    pthread_mutex_destroy(&mutex);
+    // pthread_mutex_init(philo->mutex, NULL);
 
-    printf("%d", tmp);
-    // printf("no philo: %d\n", philo->no_philo);
-    // printf("ttd: %lu\n", philo->time_to_die);
-    // printf("tte: %lu\n", philo->time_to_eat);
-    // printf("tts: %lu\n", philo->time_to_sleep);
-    // printf("ttd: %lu\n", philo->time_to_die);
-    // printf("opt: %d\n", philo->no_must_eat);
-    free(philo->thread_list);
-    free(philo);
-    return (0);
+    // philo->thread_list = malloc(philo->no_philo * sizeof(pthread_t));
+    // if (!philo->thread_list)
+    // {
+    //   free(philo);
+    //   return (1);
+    // }
+
+
+    // create_threads(philo, &tmp);
+    // pthread_mutex_destroy(philo->mutex);
+
+    // free(philo->thread_list);
+    // free(philo);
+    // return (0);
 }
