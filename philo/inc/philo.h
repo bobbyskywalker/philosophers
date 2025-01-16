@@ -3,7 +3,9 @@
 
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
+#include <unistd.h>
 
 typedef struct s_philo
 {
