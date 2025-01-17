@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 17:09:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:07:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philo
 	int						right_fork;
 	int						eat_counter;
 	bool					is_dead;
+	int						last_meal;
 	pthread_mutex_t			mutex;
 	struct s_common_data	*common_data;
 }							t_philo;
@@ -41,6 +42,7 @@ typedef struct s_common_data
 	int						no_must_eat;
 	struct timeval			start_time;
 	pthread_mutex_t			*forks_mutexes;
+	bool					program_status;
 }							t_common_data;
 
 // SECTION: philo utils

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 17:15:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:57:06 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void sim_eating(t_philo *philo)
     get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
     printf("\033[0;32m%ldms\033[0m %d has taken a fork\n", time_in_ms, philo->id);
     get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
+	philo->last_meal = time_in_ms;
     printf("\033[0;32m%ldms\033[0m %d is eating\n", time_in_ms, philo->id);
     philo->eat_counter++;
     usleep(philo->common_data->time_to_eat * 1000);

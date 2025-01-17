@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:23:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 15:26:57 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:08:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	init_forks(t_common_data *data)
 	data->forks_mutexes = malloc(sizeof(pthread_mutex_t) * data->no_philo);
 	if (!data->forks_mutexes)
 		return (1);
+	data->program_status = true;
 	i = 0;
 	while (i < data->no_philo)
 	{

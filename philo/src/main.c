@@ -6,12 +6,15 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:52 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 15:58:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:14:04 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+
+// TODO: add a death monitor
+// figure out the fork problem
 int	main(int ac, char **av)
 {
 	t_common_data	*common_data;
