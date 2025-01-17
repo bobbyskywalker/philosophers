@@ -1,62 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/17 12:49:52 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/01/17 15:58:50 by agarbacz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo.h"
 
-
-// TODO: create structures with philosopher data (status, etc.)
-// Create logging (activities)
-// Initialize threads
-
-void create_threads(t_philo *philo, int *n)
+int	main(int ac, char **av)
 {
-    int i;
+	t_common_data	*common_data;
+	t_philo			**philo_arr;
+	pthread_t		*threads;
 
-    i = 0;
-    while (i < philo->no_philo)
-    {
-        pthread_create(&philo->thread_list[i], NULL, dummy_philo_action, &n);
-        i++;
-    }
-    i = 0;
-    while (i < philo->no_philo)
-    {
-        pthread_join(philo->thread_list[i], NULL);
-        i++;
-    }
-}
-
-int main(int ac, char **av)
-{
-    t_philo *philo;
-
-    int tmp = 1;
-    philo = malloc(sizeof(t_philo));
-    if (!philo)
-        return (1);
-    if (error_handler(ac, av, philo))
-    {
-        printf("valid exec: ./philo <no. philosophers> <time to die> <time to eat> <time to sleep> [opt. <no. of times to eat>]\n");
-        return (1);
-    }
-    // philo->mutex = malloc(sizeof(pthread_mutex_t));
-    // if (!philo->mutex)
-    // {
-    //     free(philo);
-    //     return (1);
-    // }
-
-    // pthread_mutex_init(philo->mutex, NULL);
-
-    // philo->thread_list = malloc(philo->no_philo * sizeof(pthread_t));
-    // if (!philo->thread_list)
-    // {
-    //   free(philo);
-    //   return (1);
-    // }
-
-
-    // create_threads(philo, &tmp);
-    // pthread_mutex_destroy(philo->mutex);
-
-    // free(philo->thread_list);
-    // free(philo);
-    // return (0);
+	threads = NULL;
+	common_data = malloc(sizeof(t_common_data));
+	if (!common_data)
+		return (1);
+	if (parse_args(ac, av, common_data))
+		return (print_error());
+	if (init_forks(common_data))
+		return (1);
+	philo_arr = init_philo(common_data);
+	init_threads(threads, common_data, philo_arr);
+	free(threads);
+	destroy_forks(common_data);
+	return (0);
 }
