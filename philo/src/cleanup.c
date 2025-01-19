@@ -12,11 +12,13 @@
 
 #include "../inc/philo.h"
 
-void	destroy_forks(t_common_data *data)
+void	destroy_mutexes(t_common_data *data)
 {
 	int	i;
 
 	i = 0;
+	pthread_mutex_destroy(&data->death_mutex);
 	while (i < data->no_philo)
 		pthread_mutex_destroy(&data->forks_mutexes[i++]);
+	free(data->forks_mutexes);
 }

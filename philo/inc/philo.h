@@ -28,7 +28,7 @@ typedef struct s_philo
 	int						right_fork;
 	int						eat_counter;
 	bool					is_dead;
-	int						last_meal;
+	long					last_meal;
 	pthread_mutex_t			mutex;
 	struct s_common_data	*common_data;
 }							t_philo;
@@ -42,6 +42,7 @@ typedef struct s_common_data
 	int						no_must_eat;
 	struct timeval			start_time;
 	pthread_mutex_t			*forks_mutexes;
+	pthread_mutex_t			death_mutex;
 	bool					program_status;
 }							t_common_data;
 
@@ -66,7 +67,11 @@ void						sim_eating(t_philo *philo);
 void						sim_thinking(t_philo *philo);
 void						*philo_routine(void *arg);
 
+// SECTION: philo monitoring
+void						*watchdog_thread(void *arg);
+int							check_status(t_philo *philo);
+
 // SECTION: cleanup
-void						destroy_forks(t_common_data *data);
+void						destroy_mutexes(t_common_data *data);
 
 #endif

@@ -43,7 +43,7 @@ t_philo	**init_philo(t_common_data *data)
 pthread_t	*init_threads(pthread_t *threads, t_common_data *data,
 		t_philo **philo_arr)
 {
-	int	i;
+	int	i; 
 
 	threads = malloc(sizeof(pthread_t) * data->no_philo);
 	if (!threads)
@@ -81,5 +81,7 @@ int	init_forks(t_common_data *data)
 			return (1);
 		i++;
 	}
+	if (pthread_mutex_init(&data->death_mutex, NULL))
+        return (1);
 	return (0);
 }
