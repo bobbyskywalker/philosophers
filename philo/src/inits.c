@@ -6,11 +6,25 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:23:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 18:08:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:43:41 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	assign_forks(t_philo *philo, int index, int no_philo)
+{
+	if (no_philo % 2 == 0)
+	{
+		philo->left_fork = index;
+		philo->right_fork = (index + 1) % no_philo;
+	}
+	else
+	{
+		philo->left_fork = (index + 1) % no_philo;
+		philo->right_fork = index;
+	}
+}
 
 t_philo	**init_philo(t_common_data *data)
 {
@@ -29,8 +43,7 @@ t_philo	**init_philo(t_common_data *data)
 			ft_arr2d_free(philo_arr);
 			return (NULL);
 		}
-		philo_arr[i]->left_fork = i;
-		philo_arr[i]->right_fork = (i + 1) % data->no_philo;
+		assign_forks(philo_arr[i], i, data->no_philo);
 		philo_arr[i]->id = i + 1;
 		philo_arr[i]->eat_counter = 0;
 		philo_arr[i]->is_dead = false;
@@ -43,7 +56,7 @@ t_philo	**init_philo(t_common_data *data)
 pthread_t	*init_threads(pthread_t *threads, t_common_data *data,
 		t_philo **philo_arr)
 {
-	int	i; 
+	int	i;
 
 	threads = malloc(sizeof(pthread_t) * data->no_philo);
 	if (!threads)
@@ -82,6 +95,6 @@ int	init_forks(t_common_data *data)
 		i++;
 	}
 	if (pthread_mutex_init(&data->death_mutex, NULL))
-        return (1);
+		return (1);
 	return (0);
 }

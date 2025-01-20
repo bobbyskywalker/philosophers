@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:52 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 18:14:04 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:34:02 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int ac, char **av)
 	if (init_forks(common_data))
 		return (1);
 	philo_arr = init_philo(common_data);
-
 	if (pthread_create(&watchdog, NULL, watchdog_thread, (void *)philo_arr))
 		return (1);
 	pthread_detach(watchdog);
