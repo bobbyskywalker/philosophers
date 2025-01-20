@@ -14,16 +14,8 @@
 
 void	assign_forks(t_philo *philo, int index, int no_philo)
 {
-	if (no_philo % 2 == 0)
-	{
-		philo->left_fork = index;
-		philo->right_fork = (index + 1) % no_philo;
-	}
-	else
-	{
-		philo->left_fork = (index + 1) % no_philo;
-		philo->right_fork = index;
-	}
+	philo->left_fork = index;
+	philo->right_fork = (index + 1) % no_philo;
 }
 
 t_philo	**init_philo(t_common_data *data)

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:38:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 16:58:00 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:51:24 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,4 @@ void	ft_arr2d_free(t_philo **arr)
 		i++;
 	}
 	free(arr);
-}
-
-void	get_time_in_ms(struct timeval *start_time, long *ms)
-{
-	struct timeval tv;
-	long seconds;
-	long microseconds;
-
-	gettimeofday(&tv, NULL);
-	seconds = tv.tv_sec - start_time->tv_sec;
-	microseconds = tv.tv_usec - start_time->tv_usec;
-	*ms = (seconds * 1000) + (microseconds / 1000);
 }

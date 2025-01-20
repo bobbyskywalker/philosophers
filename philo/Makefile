@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = philo
 
-SRCS = src/main.c src/parse.c src/utils.c src/routines.c src/inits.c src/cleanup.c src/watchdog.c
+SRCS = src/main.c src/parse.c src/utils.c src/routines.c src/inits.c src/cleanup.c src/watchdog.c src/time_utils.c
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BONUS_SRCS:.c=.o)

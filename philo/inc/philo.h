@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/17 18:07:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:52:54 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_common_data
 	pthread_mutex_t			*forks_mutexes;
 	pthread_mutex_t			death_mutex;
 	bool					program_status;
+	bool					is_opt_arg;
 }							t_common_data;
 
 // SECTION: philo utils
@@ -54,6 +55,8 @@ int							ft_atol(const char *str, long *result);
 void						ft_arr2d_free(t_philo **arr);
 void						get_time_in_ms(struct timeval *start_time,
 								long *ms);
+int							ft_usleep(size_t milliseconds);
+size_t						ft_usleep_gettime(void);
 
 // SECTION: philo inits
 int							init_forks(t_common_data *data);
@@ -66,6 +69,7 @@ void						sim_sleeping(t_philo *arg);
 void						sim_eating(t_philo *philo);
 void						sim_thinking(t_philo *philo);
 void						*philo_routine(void *arg);
+int							ft_usleep(size_t milliseconds);
 
 // SECTION: philo monitoring
 void						*watchdog_thread(void *arg);

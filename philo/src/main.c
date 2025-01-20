@@ -6,16 +6,16 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:52 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 11:34:02 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:10:12 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
 
-// TODO: add an eat counter to the watchdog
-// modify the fork picking to treat BOTH forks as an atomic operation
-// if you cant pick any of the forks dont pick none
+// TODO: fix additional printing after all ate
+// fix the norm
+// valgrind
 int	main(int ac, char **av)
 {
 	t_common_data	*common_data;
