@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 13:07:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:26:16 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 typedef struct s_philo
 {
 	int						id;
-	int						left_fork;
-	int						right_fork;
+	int						l_fork;
+	int						r_fork;
 	int						eat_counter;
 	bool					is_dead;
 	long					last_meal;
@@ -47,10 +47,12 @@ typedef struct s_common_data
 	bool					is_opt_arg;
 }							t_common_data;
 
-// SECTION: philo utils
+// SECTION: parsing utils
 int							parse_args(int ac, char **av,
 								t_common_data *params);
 int							print_error(void);
+
+// SECTION: philo utils
 int							ft_atol(const char *str, long *result);
 void						ft_arr2d_free(t_philo **arr);
 void						get_time_in_ms(struct timeval *start_time,
@@ -69,8 +71,10 @@ void						sim_sleeping(t_philo *arg);
 void						sim_eating(t_philo *philo);
 void						sim_thinking(t_philo *philo);
 void						lock_forks(t_philo *philo, long time_in_ms);
+void						lock_left_fork(t_philo *philo, long time_in_ms);
+void						lock_right_fork(t_philo *philo, long time_in_ms);
+void						unlock_forks(t_philo *philo);
 void						*philo_routine(void *arg);
-int							ft_usleep(size_t milliseconds);
 
 // SECTION: philo monitoring
 void						*watchdog_thread(void *arg);

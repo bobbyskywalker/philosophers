@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:23:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 13:19:05 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:26:16 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	assign_forks(t_philo *philo, int index, int no_philo)
 {
-	philo->left_fork = index;
-	philo->right_fork = (index + 1) % no_philo;
+	philo->l_fork = index;
+	philo->r_fork = (index + 1) % no_philo;
 }
 
 t_philo	**init_philo(t_common_data *data)
