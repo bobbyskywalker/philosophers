@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:38:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 18:51:24 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:21:58 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,15 @@ int	ft_atol(const char *str, long *result)
 void	ft_arr2d_free(t_philo **arr)
 {
 	int	i;
+	int	len;
 
+	len = arr[0]->common_data->no_philo;
 	i = 0;
-	while (arr[i])
+	while (i < len)
 	{
 		free(arr[i]);
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }

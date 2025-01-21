@@ -6,11 +6,23 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:47:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 17:39:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:52:53 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static int	init_opt_arg(int ac, char **av, long temp, t_common_data *params)
+{
+	if (ac == 6)
+	{
+		if (!av[5] || ft_atol(av[5], &temp) || temp < 0 || temp > INT_MAX)
+			return (1);
+		params->no_must_eat = (int)temp;
+		params->is_opt_arg = true;
+	}
+	return (0);
+}
 
 int	parse_args(int ac, char **av, t_common_data *params)
 {
@@ -30,16 +42,9 @@ int	parse_args(int ac, char **av, t_common_data *params)
 	if (!av[4] || ft_atol(av[4], &temp) || temp <= 0 || temp > LONG_MAX)
 		return (1);
 	params->time_to_sleep = temp;
-	params->is_opt_arg = false;
-	if (ac == 6)
-	{
-		if (!av[5] || ft_atol(av[5], &temp) || temp < 0 || temp > INT_MAX)
-			return (1);
-		params->no_must_eat = (int)temp;
-		params->is_opt_arg = true;
-	}
 	gettimeofday(&params->start_time, NULL);
-	return (0);
+	params->is_opt_arg = false;
+	return (init_opt_arg(ac, av, temp, params));
 }
 
 int	print_error(void)

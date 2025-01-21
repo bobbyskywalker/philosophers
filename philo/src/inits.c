@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:23:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 11:43:41 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:19:05 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ t_philo	**init_philo(t_common_data *data)
 		philo_arr[i]->id = i + 1;
 		philo_arr[i]->eat_counter = 0;
 		philo_arr[i]->is_dead = false;
+		philo_arr[i]->last_meal = 0;
 		philo_arr[i]->common_data = data;
 		i++;
 	}
 	return (philo_arr);
 }
 
-pthread_t	*init_threads(pthread_t *threads, t_common_data *data,
-		t_philo **philo_arr)
+pthread_t	*init_threads(t_common_data *data, t_philo **philo_arr)
 {
-	int	i;
+	int			i;
+	pthread_t	*threads;
 
 	threads = malloc(sizeof(pthread_t) * data->no_philo);
 	if (!threads)
@@ -58,7 +59,10 @@ pthread_t	*init_threads(pthread_t *threads, t_common_data *data,
 	{
 		if (pthread_create(&threads[i], NULL, philo_routine,
 				(void *)philo_arr[i]))
+		{
+			free(threads);
 			return (NULL);
+		}
 		i++;
 	}
 	i = 0;
@@ -86,7 +90,7 @@ int	init_forks(t_common_data *data)
 			return (1);
 		i++;
 	}
-	if (pthread_mutex_init(&data->death_mutex, NULL))
+	if (pthread_mutex_init(&data->end_mutex, NULL))
 		return (1);
 	return (0);
 }

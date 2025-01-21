@@ -6,16 +6,13 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:52 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 19:10:12 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:21:46 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-
 // TODO: fix additional printing after all ate
-// fix the norm
-// valgrind
 int	main(int ac, char **av)
 {
 	t_common_data	*common_data;
@@ -35,8 +32,7 @@ int	main(int ac, char **av)
 	if (pthread_create(&watchdog, NULL, watchdog_thread, (void *)philo_arr))
 		return (1);
 	pthread_detach(watchdog);
-	init_threads(threads, common_data, philo_arr);
-	free(threads);
-	destroy_mutexes(common_data);
+	threads = init_threads(common_data, philo_arr);
+	clean_up(common_data, threads, philo_arr);
 	return (0);
 }

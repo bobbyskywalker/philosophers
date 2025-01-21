@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/20 18:52:54 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:07:30 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_common_data
 	int						no_must_eat;
 	struct timeval			start_time;
 	pthread_mutex_t			*forks_mutexes;
-	pthread_mutex_t			death_mutex;
+	pthread_mutex_t			end_mutex;
 	bool					program_status;
 	bool					is_opt_arg;
 }							t_common_data;
@@ -60,14 +60,15 @@ size_t						ft_usleep_gettime(void);
 
 // SECTION: philo inits
 int							init_forks(t_common_data *data);
-pthread_t					*init_threads(pthread_t *threads,
-								t_common_data *data, t_philo **philo_arr);
+pthread_t					*init_threads(t_common_data *data,
+								t_philo **philo_arr);
 t_philo						**init_philo(t_common_data *data);
 
 // SECTION: philo routines
 void						sim_sleeping(t_philo *arg);
 void						sim_eating(t_philo *philo);
 void						sim_thinking(t_philo *philo);
+void						lock_forks(t_philo *philo, long time_in_ms);
 void						*philo_routine(void *arg);
 int							ft_usleep(size_t milliseconds);
 
@@ -76,6 +77,7 @@ void						*watchdog_thread(void *arg);
 int							check_status(t_philo *philo);
 
 // SECTION: cleanup
-void						destroy_mutexes(t_common_data *data);
+void						clean_up(t_common_data *data, pthread_t *threads,
+								t_philo **philo_arr);
 
 #endif
