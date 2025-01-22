@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/22 10:38:13 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:28:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	*philo_routine(void *arg)
 		if (!check_status(philo) || philo->is_dead)
 			return (NULL);
 		sim_thinking(philo);
-		ft_usleep(1);
+		// ft_usleep(1);
 	}
 	return (NULL);
 }
