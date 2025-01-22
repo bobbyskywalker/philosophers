@@ -1,0 +1,2 @@
+wait - a similar to a lock in mutex
+post - unlock kinda equivalent
