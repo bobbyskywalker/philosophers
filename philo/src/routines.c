@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 15:38:33 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:38:13 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void	sim_thinking(t_philo *philo)
 {
 	long	time_in_ms;
 
+	get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
+	ft_usleep(1);
 	if (!check_status(philo))
 		return ;
-	get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
+	if (time_in_ms)
+		time_in_ms -= 1;
 	printf("\033[0;32m%ld\033[0m %d is thinking\n", time_in_ms, philo->id);
 }
 
@@ -26,11 +29,14 @@ void	sim_sleeping(t_philo *philo)
 {
 	long	time_in_ms;
 
+	get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
+	ft_usleep(1);
 	if (!check_status(philo))
 		return ;
-	get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
+	if (time_in_ms)
+		time_in_ms -= 1;
 	printf("\033[0;32m%ld\033[0m %d is sleeping\n", time_in_ms, philo->id);
-	ft_usleep(philo->common_data->time_to_sleep);
+	ft_usleep(philo->common_data->time_to_sleep - 1);
 }
 
 void	sim_eating(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:49:42 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 14:55:10 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:29:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	*watchdog_loop(t_philo **philo_arr, long time_in_ms, int i)
 }
 
 // a monitoring, detached thread for a all philos
-// checks for death and TODO: tracks the eat counter
 void	*watchdog_thread(void *arg)
 {
 	t_philo	**philo_arr;
