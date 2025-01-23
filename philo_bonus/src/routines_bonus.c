@@ -58,7 +58,7 @@ void *check_for_death(void *arg)
     long time_in_ms;
     
     philo = (t_philo *)arg;
-    while (!philo->is_dead)
+    while (!philo->is_dead && philo->eat_counter != philo->common_data->time_to_eat)
     {
         sem_wait(philo->common_data->end_sem);
         get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
@@ -66,12 +66,11 @@ void *check_for_death(void *arg)
         {
             printf("\033[0;31m%ld\033[0m %d died\n", time_in_ms, philo->id);
             philo->is_dead = true;
-            philo->common_data->program_status = false;
+            philo->common_data->run_flag = false;
             sem_post(philo->common_data->end_sem);
             break;
         }
         sem_post(philo->common_data->end_sem);
-        usleep(10);
     }
     return (NULL);
 }
@@ -86,18 +85,15 @@ void *philo_routine(void *arg)
     philo->is_dead = false;
     get_time_in_ms(&philo->common_data->start_time, &time_in_ms);
     philo->last_meal = time_in_ms;
-    
     if (pthread_create(&death_monitor, NULL, check_for_death, (void *)philo) != 0)
         return (NULL);
-    if (!(philo->id % 2))
-		ft_usleep(1);
-    while (!philo->is_dead && philo->common_data->program_status)
+    while (!philo->is_dead && philo->common_data->run_flag)
     {
-		if ((philo->common_data->program_status))
+		if ((philo->common_data->run_flag))
         	sim_eating(philo);
-		if ((philo->common_data->program_status))
+		if ((philo->common_data->run_flag))
         	sim_sleeping(philo);
-		if ((philo->common_data->program_status))
+		if ((philo->common_data->run_flag))
         	sim_thinking(philo);
     }
     pthread_join(death_monitor, NULL);

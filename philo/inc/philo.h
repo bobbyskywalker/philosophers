@@ -30,7 +30,7 @@ typedef struct s_philo
 	bool					is_dead;
 	long					last_meal;
 	pthread_mutex_t			mutex;
-	struct s_common_data	*common_data;
+	struct s_common_data	*sh_data;
 }							t_philo;
 
 typedef struct s_common_data
@@ -43,7 +43,7 @@ typedef struct s_common_data
 	struct timeval			start_time;
 	pthread_mutex_t			*forks_mutexes;
 	pthread_mutex_t			end_mutex;
-	bool					program_status;
+	bool					run_flag;
 	bool					is_opt_arg;
 }							t_common_data;
 

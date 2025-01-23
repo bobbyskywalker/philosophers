@@ -40,7 +40,7 @@ t_philo	**init_philo(t_common_data *data)
 		philo_arr[i]->eat_counter = 0;
 		philo_arr[i]->is_dead = false;
 		philo_arr[i]->last_meal = 0;
-		philo_arr[i]->common_data = data;
+		philo_arr[i]->sh_data = data;
 		i++;
 	}
 	return (philo_arr);
@@ -82,7 +82,7 @@ int	init_forks(t_common_data *data)
 	data->forks_mutexes = malloc(sizeof(pthread_mutex_t) * data->no_philo);
 	if (!data->forks_mutexes)
 		return (1);
-	data->program_status = true;
+	data->run_flag = true;
 	i = 0;
 	while (i < data->no_philo)
 	{

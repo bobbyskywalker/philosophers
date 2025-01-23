@@ -15,7 +15,7 @@
 static void	stop_threads(t_common_data *data)
 {
 	pthread_mutex_lock(&data->end_mutex);
-	data->program_status = false;
+	data->run_flag = false;
 	pthread_mutex_unlock(&data->end_mutex);
 }
 

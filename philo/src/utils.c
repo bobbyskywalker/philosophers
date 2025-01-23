@@ -61,7 +61,7 @@ void	ft_arr2d_free(t_philo **arr)
 	int	i;
 	int	len;
 
-	len = arr[0]->common_data->no_philo;
+	len = arr[0]->sh_data->no_philo;
 	i = 0;
 	while (i < len)
 	{

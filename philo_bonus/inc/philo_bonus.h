@@ -42,7 +42,7 @@ typedef struct s_common_data
 	long					time_to_sleep;
 	int						no_must_eat;
 	struct timeval			start_time;
-	bool					program_status;
+	bool					run_flag;
 	bool					is_opt_arg;
 	sem_t					*forks_sem;
 	sem_t					*end_sem;

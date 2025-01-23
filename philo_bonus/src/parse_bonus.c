@@ -44,7 +44,7 @@ int	parse_args(int ac, char **av, t_common_data *params)
 	params->time_to_sleep = temp;
 	gettimeofday(&params->start_time, NULL);
 	params->is_opt_arg = false;
-	params->program_status = true;
+	params->run_flag = true;
 	return (init_opt_arg(ac, av, temp, params));
 }
 

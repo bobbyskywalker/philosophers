@@ -14,19 +14,19 @@
 
 int	check_status(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->common_data->end_mutex);
-	if (!(philo->common_data->program_status))
+	pthread_mutex_lock(&philo->sh_data->end_mutex);
+	if (!(philo->sh_data->run_flag))
 	{
-		pthread_mutex_unlock(&philo->common_data->end_mutex);
+		pthread_mutex_unlock(&philo->sh_data->end_mutex);
 		return (0);
 	}
-	pthread_mutex_unlock(&philo->common_data->end_mutex);
+	pthread_mutex_unlock(&philo->sh_data->end_mutex);
 	return (1);
 }
 
 void	update_after_death(t_philo **philo_arr, int i, long time_in_ms)
 {
-	philo_arr[0]->common_data->program_status = false;
+	philo_arr[0]->sh_data->run_flag = false;
 	philo_arr[i]->is_dead = true;
 	printf("\033[0;32m%ld\033[0m \033[0;31m%d died\033[0m\n", time_in_ms,
 		philo_arr[i]->id);
@@ -40,14 +40,14 @@ bool	check_if_all_ate(t_philo **philo_arr)
 
 	i = 0;
 	already_ate = 0;
-	no_must_eat = philo_arr[0]->common_data->no_must_eat;
-	if (philo_arr[0]->common_data->is_opt_arg)
+	no_must_eat = philo_arr[0]->sh_data->no_must_eat;
+	if (philo_arr[0]->sh_data->is_opt_arg)
 	{
-		while (i < philo_arr[0]->common_data->no_philo)
+		while (i < philo_arr[0]->sh_data->no_philo)
 		{
 			if (philo_arr[i]->eat_counter >= no_must_eat)
 				already_ate++;
-			if (already_ate == philo_arr[i]->common_data->no_philo)
+			if (already_ate == philo_arr[i]->sh_data->no_philo)
 				return (true);
 			i++;
 		}
@@ -55,30 +55,29 @@ bool	check_if_all_ate(t_philo **philo_arr)
 	return (false);
 }
 
-void	*watchdog_loop(t_philo **philo_arr, long time_in_ms, int i)
+void	*watchdog_loop(t_philo **ph_arr, long t_ms, int i)
 {
 	while (1)
 	{
 		i = -1;
-		while (++i < philo_arr[0]->common_data->no_philo)
+		while (++i < ph_arr[0]->sh_data->no_philo)
 		{
-			pthread_mutex_lock(&philo_arr[0]->common_data->end_mutex);
-			get_time_in_ms(&philo_arr[0]->common_data->start_time, &time_in_ms);
-			if (philo_arr[0]->common_data->program_status
-				&& (time_in_ms - philo_arr[i]->last_meal
-					> philo_arr[i]->common_data->time_to_die))
+			pthread_mutex_lock(&ph_arr[0]->sh_data->end_mutex);
+			get_time_in_ms(&ph_arr[0]->sh_data->start_time, &t_ms);
+			if (ph_arr[0]->sh_data->run_flag && (t_ms - ph_arr[i]->last_meal
+					> ph_arr[i]->sh_data->time_to_die))
 			{
-				update_after_death(philo_arr, i, time_in_ms);
-				pthread_mutex_unlock(&philo_arr[0]->common_data->end_mutex);
+				update_after_death(ph_arr, i, t_ms);
+				pthread_mutex_unlock(&ph_arr[0]->sh_data->end_mutex);
 				return (NULL);
 			}
-			if (check_if_all_ate(philo_arr))
+			if (check_if_all_ate(ph_arr))
 			{
-				philo_arr[0]->common_data->program_status = false;
-				pthread_mutex_unlock(&philo_arr[0]->common_data->end_mutex);
+				ph_arr[0]->sh_data->run_flag = false;
+				pthread_mutex_unlock(&ph_arr[0]->sh_data->end_mutex);
 				return (NULL);
 			}
-			pthread_mutex_unlock(&philo_arr[0]->common_data->end_mutex);
+			pthread_mutex_unlock(&ph_arr[0]->sh_data->end_mutex);
 			ft_usleep(1);
 		}
 	}
