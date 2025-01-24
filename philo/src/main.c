@@ -24,7 +24,10 @@ int	main(int ac, char **av)
 	if (!sh_data)
 		return (1);
 	if (parse_args(ac, av, sh_data))
+	{
+		free(sh_data);
 		return (print_error());
+	}
 	if (init_forks(sh_data))
 		return (1);
 	philo_arr = init_philo(sh_data);
