@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:47:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 11:52:53 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:07:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	init_opt_arg(int ac, char **av, long temp, t_common_data *params)
 	return (0);
 }
 
+// parses and initializes the shared, common data object
 int	parse_args(int ac, char **av, t_common_data *params)
 {
 	long	temp;

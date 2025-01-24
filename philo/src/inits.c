@@ -6,18 +6,21 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:23:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 15:26:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:06:53 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+// assigns the indexes to the corresponding place
+// in the fork array
 void	assign_forks(t_philo *philo, int index, int no_philo)
 {
 	philo->l_fork = index;
 	philo->r_fork = (index + 1) % no_philo;
 }
 
+// initializes the philosopher objects
 t_philo	**init_philo(t_common_data *data)
 {
 	int		i;
@@ -46,6 +49,7 @@ t_philo	**init_philo(t_common_data *data)
 	return (philo_arr);
 }
 
+// initialize and run the philosopher threads
 pthread_t	*init_threads(t_common_data *data, t_philo **philo_arr)
 {
 	int			i;
@@ -74,7 +78,7 @@ pthread_t	*init_threads(t_common_data *data, t_philo **philo_arr)
 	return (threads);
 }
 
-// no_philo == no_forks de facto means no_mutexes
+// init the fork-mutex array
 int	init_forks(t_common_data *data)
 {
 	int	i;

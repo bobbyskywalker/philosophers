@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/22 17:20:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:45:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_common_data
 	long					time_to_sleep;
 	int						no_must_eat;
 	struct timeval			start_time;
-	bool					run_flag;
+	bool					program_status;
 	bool					is_opt_arg;
 	sem_t					*forks_sem;
 	sem_t					*end_sem;

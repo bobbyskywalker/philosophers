@@ -6,13 +6,14 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:50:05 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/21 15:26:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:35:03 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+// SECTION: includes
 # include <limits.h>
 # include <pthread.h>
 # include <stdbool.h>
@@ -21,6 +22,15 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+// SECTION: data structures
+
+// id: an identifier number, used for printing
+// l_fork/r_fork: indexes of the individual forks in the forks-mutexes array
+// eat_counter: number of times a philo has eaten
+// is_dead: true if a philo is dead (program termination condition)
+// last_meal: last time a philo ate
+// mutex: mutex for the philo
+// sh_data: shared data for all philosophers
 typedef struct s_philo
 {
 	int						id;
@@ -33,6 +43,16 @@ typedef struct s_philo
 	struct s_common_data	*sh_data;
 }							t_philo;
 
+// no_philo: number of philosophers in the current program call
+// time_to_die: time to die in milliseconds
+// time_to_eat: time to eat in milliseconds
+// time_to_sleep: time to sleep in milliseconds
+// no_must_eat: number of times a philo must eat
+// start_time: the start time of the program in milliseconds
+// forks_mutexes: array of mutexes for the forks
+// end_mutex: mutex for the end of the program checks
+// run_flag: true if the program is running
+// is_opt_arg: true if the program has an optional argument
 typedef struct s_common_data
 {
 	int						no_philo;
@@ -51,10 +71,9 @@ typedef struct s_common_data
 int							parse_args(int ac, char **av,
 								t_common_data *params);
 int							print_error(void);
-
-// SECTION: philo utils
 int							ft_atol(const char *str, long *result);
-void						ft_arr2d_free(t_philo **arr);
+
+// SECTION: time utils
 void						get_time_in_ms(struct timeval *start_time,
 								long *ms);
 int							ft_usleep(size_t milliseconds);
@@ -83,5 +102,6 @@ int							check_status(t_philo *philo);
 // SECTION: cleanup
 void						clean_up(t_common_data *data, pthread_t *threads,
 								t_philo **philo_arr);
+void						ft_arr2d_free(t_philo **arr);
 
 #endif

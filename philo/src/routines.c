@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:49:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/22 14:28:17 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:26:46 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	sim_eating(t_philo *philo)
 	}
 }
 
+// highest level routine function
+// all other routines are called from here
+// even- indexed philos start later in order to prevent\
+// starvation
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;

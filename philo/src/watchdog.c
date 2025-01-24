@@ -6,12 +6,14 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:49:42 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/22 14:32:45 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:28:32 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+// a utility function to that checks the status of a program 
+// before a philo performs any action
 int	check_status(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->sh_data->end_mutex);
@@ -85,6 +87,8 @@ void	*watchdog_loop(t_philo **ph_arr, long t_ms, int i)
 }
 
 // a monitoring, detached thread for a all philos
+// exits the program if a philo dies or all of them eat
+// no_must_eat times
 void	*watchdog_thread(void *arg)
 {
 	t_philo	**philo_arr;
